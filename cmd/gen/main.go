@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/go-openapi/spec"
 	backendconfigv1beta1 "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1"
@@ -16,15 +17,15 @@ func main() {
 		},
 	}
 
-	backendConfig := backendconfigv1beta1.GetOpenAPIDefinitions(spec.MustCreateRef)
-	frontendConfig := frontendconfigv1beta1.GetOpenAPIDefinitions(spec.MustCreateRef)
+	backendConfig := backendconfigv1beta1.GetOpenAPIDefinitions(ref)
+	frontendConfig := frontendconfigv1beta1.GetOpenAPIDefinitions(ref)
 
 	for k, v := range backendConfig {
-		swagger.Definitions[k] = v.Schema
+		swagger.Definitions[slashToDot(k)] = v.Schema
 	}
 
 	for k, v := range frontendConfig {
-		swagger.Definitions[k] = v.Schema
+		swagger.Definitions[slashToDot(k)] = v.Schema
 	}
 
 	bs, err := json.MarshalIndent(swagger, "", "  ")
@@ -33,4 +34,12 @@ func main() {
 	}
 
 	fmt.Println(string(bs))
+}
+
+func slashToDot(in string) (out string) {
+	return strings.ReplaceAll(in, "/", ".")
+}
+
+func ref(uri string) spec.Ref {
+	return spec.MustCreateRef("#/definitions/" + slashToDot(uri))
 }

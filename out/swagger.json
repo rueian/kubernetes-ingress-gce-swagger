@@ -1,7 +1,7 @@
 {
   "paths": null,
   "definitions": {
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfig": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.BackendConfig": {
       "properties": {
         "apiVersion": {
           "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
@@ -12,33 +12,33 @@
           "type": "string"
         },
         "metadata": {
-          "$ref": "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"
+          "$ref": "#/definitions/k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta"
         },
         "spec": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigSpec"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.BackendConfigSpec"
         },
         "status": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigStatus"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.BackendConfigStatus"
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigSpec": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.BackendConfigSpec": {
       "description": "BackendConfigSpec is the spec for a BackendConfig resource",
       "properties": {
         "cdn": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CDNConfig"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.CDNConfig"
         },
         "connectionDraining": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.ConnectionDrainingConfig"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.ConnectionDrainingConfig"
         },
         "iap": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.IAPConfig"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.IAPConfig"
         },
         "securityPolicy": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SecurityPolicyConfig"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.SecurityPolicyConfig"
         },
         "sessionAffinity": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SessionAffinityConfig"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.SessionAffinityConfig"
         },
         "timeoutSec": {
           "type": "integer",
@@ -46,21 +46,21 @@
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CDNConfig": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.CDNConfig": {
       "description": "CDNConfig contains configuration for CDN-enabled backends.",
       "required": [
         "enabled"
       ],
       "properties": {
         "cachePolicy": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CacheKeyPolicy"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.CacheKeyPolicy"
         },
         "enabled": {
           "type": "boolean"
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CacheKeyPolicy": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.CacheKeyPolicy": {
       "description": "CacheKeyPolicy contains configuration for how requests to a CDN-enabled backend are cached.",
       "properties": {
         "includeHost": {
@@ -91,7 +91,7 @@
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.ConnectionDrainingConfig": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.ConnectionDrainingConfig": {
       "description": "ConnectionDrainingConfig contains configuration for connection draining. For now the draining timeout. May manage more settings in the future.",
       "properties": {
         "drainingTimeoutSec": {
@@ -101,7 +101,7 @@
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.IAPConfig": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.IAPConfig": {
       "description": "IAPConfig contains configuration for IAP-enabled backends.",
       "required": [
         "enabled",
@@ -112,11 +112,11 @@
           "type": "boolean"
         },
         "oauthclientCredentials": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.OAuthClientCredentials"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.OAuthClientCredentials"
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.OAuthClientCredentials": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.OAuthClientCredentials": {
       "description": "OAuthClientCredentials contains credentials for a single IAP-enabled backend.",
       "required": [
         "secretName"
@@ -136,7 +136,7 @@
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SessionAffinityConfig": {
+    "k8s.io.ingress-gce.pkg.apis.backendconfig.v1beta1.SessionAffinityConfig": {
       "description": "SessionAffinityConfig contains configuration for stickyness parameters.",
       "properties": {
         "affinityCookieTtlSec": {
@@ -148,7 +148,7 @@
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfig": {
+    "k8s.io.ingress-gce.pkg.apis.frontendconfig.v1beta1.FrontendConfig": {
       "type": "object",
       "required": [
         "spec",
@@ -164,17 +164,17 @@
           "type": "string"
         },
         "metadata": {
-          "$ref": "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"
+          "$ref": "#/definitions/k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta"
         },
         "spec": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigSpec"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.frontendconfig.v1beta1.FrontendConfigSpec"
         },
         "status": {
-          "$ref": "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigStatus"
+          "$ref": "#/definitions/k8s.io.ingress-gce.pkg.apis.frontendconfig.v1beta1.FrontendConfigStatus"
         }
       }
     },
-    "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigSpec": {
+    "k8s.io.ingress-gce.pkg.apis.frontendconfig.v1beta1.FrontendConfigSpec": {
       "description": "FrontendConfigSpec is the spec for a FrontendConfig resource",
       "type": "object"
     }
