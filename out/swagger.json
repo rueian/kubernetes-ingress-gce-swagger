@@ -1,0 +1,182 @@
+{
+  "paths": null,
+  "definitions": {
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfig": {
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigSpec"
+        },
+        "status": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigStatus"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.BackendConfigSpec": {
+      "description": "BackendConfigSpec is the spec for a BackendConfig resource",
+      "properties": {
+        "cdn": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CDNConfig"
+        },
+        "connectionDraining": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.ConnectionDrainingConfig"
+        },
+        "iap": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.IAPConfig"
+        },
+        "securityPolicy": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SecurityPolicyConfig"
+        },
+        "sessionAffinity": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SessionAffinityConfig"
+        },
+        "timeoutSec": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CDNConfig": {
+      "description": "CDNConfig contains configuration for CDN-enabled backends.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "cachePolicy": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CacheKeyPolicy"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.CacheKeyPolicy": {
+      "description": "CacheKeyPolicy contains configuration for how requests to a CDN-enabled backend are cached.",
+      "properties": {
+        "includeHost": {
+          "description": "If true, requests to different hosts will be cached separately.",
+          "type": "boolean"
+        },
+        "includeProtocol": {
+          "description": "If true, http and https requests will be cached separately.",
+          "type": "boolean"
+        },
+        "includeQueryString": {
+          "description": "If true, query string parameters are included in the cache key according to QueryStringBlacklist and QueryStringWhitelist. If neither is set, the entire query string is included and if false the entire query string is excluded.",
+          "type": "boolean"
+        },
+        "queryStringBlacklist": {
+          "description": "Names of query strint parameters to exclude from cache keys. All other parameters are included. Either specify QueryStringBlacklist or QueryStringWhitelist, but not both.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queryStringWhitelist": {
+          "description": "Names of query string parameters to include in cache keys. All other parameters are excluded. Either specify QueryStringBlacklist or QueryStringWhitelist, but not both.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.ConnectionDrainingConfig": {
+      "description": "ConnectionDrainingConfig contains configuration for connection draining. For now the draining timeout. May manage more settings in the future.",
+      "properties": {
+        "drainingTimeoutSec": {
+          "description": "Draining timeout in seconds.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.IAPConfig": {
+      "description": "IAPConfig contains configuration for IAP-enabled backends.",
+      "required": [
+        "enabled",
+        "oauthclientCredentials"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "oauthclientCredentials": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.OAuthClientCredentials"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.OAuthClientCredentials": {
+      "description": "OAuthClientCredentials contains credentials for a single IAP-enabled backend.",
+      "required": [
+        "secretName"
+      ],
+      "properties": {
+        "clientID": {
+          "description": "Direct reference to OAuth client id.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Direct reference to OAuth client secret.",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of a k8s secret which stores the OAuth client id \u0026 secret.",
+          "type": "string"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/backendconfig/v1beta1.SessionAffinityConfig": {
+      "description": "SessionAffinityConfig contains configuration for stickyness parameters.",
+      "properties": {
+        "affinityCookieTtlSec": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "affinityType": {
+          "type": "string"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfig": {
+      "type": "object",
+      "required": [
+        "spec",
+        "status"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigSpec"
+        },
+        "status": {
+          "$ref": "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigStatus"
+        }
+      }
+    },
+    "k8s.io/ingress-gce/pkg/apis/frontendconfig/v1beta1.FrontendConfigSpec": {
+      "description": "FrontendConfigSpec is the spec for a FrontendConfig resource",
+      "type": "object"
+    }
+  }
+}
